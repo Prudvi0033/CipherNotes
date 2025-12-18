@@ -11,7 +11,6 @@ const notesSchema = new Schema(
     content: {
       type: String,
       required: true,
-      maxlength: 500,
     },
     password: {
       type: String,

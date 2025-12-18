@@ -19,7 +19,9 @@ export const createNotes = async (c: Context) => {
       );
     }
 
-    if (content.length > 500) {
+    const nonWhitespaceContentLength = content.replace(/\s/g, "").length;
+
+    if (nonWhitespaceContentLength > 500) {
       return c.json(
         {
           data: {
@@ -48,6 +50,7 @@ export const createNotes = async (c: Context) => {
       },
     });
   } catch (error) {
+    console.log(error);
     return c.json(
       {
         data: {
