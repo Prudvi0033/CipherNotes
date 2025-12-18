@@ -21,18 +21,11 @@ const notesSchema = new Schema(
       type: Date,
       default: null,
     },
-    isExpired: {
-      type: Boolean,
-      default: false,
-    },
   },
   { timestamps: true }
 );
 
-notesSchema.index(
-    {expiresIn: 1},
-    {expireAfterSeconds: 0}
-)
+notesSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
 const Note = model("Note", notesSchema);
 
