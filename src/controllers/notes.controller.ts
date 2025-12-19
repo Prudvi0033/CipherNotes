@@ -78,7 +78,7 @@ export const viewNotes = async (c: Context) => {
             msg: "Notes doesn't exist",
           },
         },
-        400
+        202
       );
     }
 
@@ -89,7 +89,7 @@ export const viewNotes = async (c: Context) => {
             msg: "Notes already expired",
           },
         },
-        400
+        202
       );
     }
 
@@ -100,7 +100,7 @@ export const viewNotes = async (c: Context) => {
             msg: "Please enter password",
           },
         },
-        400
+        202
       );
     }
 
@@ -116,7 +116,7 @@ export const viewNotes = async (c: Context) => {
             msg: "Incorrect password",
           },
         },
-        400
+        202
       );
     }
 
@@ -127,6 +127,7 @@ export const viewNotes = async (c: Context) => {
         data: {
           msg: "You can view content",
           content: content,
+          expiresAt: existingNotes.expiresAt
         },
       },
       200
@@ -155,7 +156,18 @@ export const getNotesById = async (c: Context) => {
       return c.json(
         {
           data: {
-            msg: "No notes found with this id",
+            exists: false,
+          },
+        },
+        202
+      );
+    }
+
+    if (notes.expiresAt && new Date() > notes.expiresAt) {
+      return c.json(
+        {
+          data: {
+            isExpired: true,
           },
         },
         400
@@ -166,9 +178,11 @@ export const getNotesById = async (c: Context) => {
       {
         data: {
           msg: "Notes found",
+          exists: true,
+          isExpired: false,
           noteId: notes.noteId,
           createdAt: notes.createdAt,
-          expiresIn: notes.expiresAt,
+          expiresAt: notes.expiresAt,
         },
       },
       200
