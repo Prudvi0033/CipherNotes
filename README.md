@@ -1,6 +1,7 @@
 # CipherNotes Backend
 
-![Backend Overview](./backend-overview.png)
+<img width="1255" height="508" alt="image" src="https://github.com/user-attachments/assets/00d7e7fc-7181-405c-ac60-42b7668e1bb3" />
+
 
 ## Overview
 
