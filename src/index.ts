@@ -5,9 +5,9 @@ import { cors } from "hono/cors";
 
 const app = new Hono()
 
-app.use(cors({
-    origin: "*",
-    allowMethods: ['GET', 'POST']
+app.use("/*", cors({
+  origin: "*",
+  allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 }))
 
 app.get("/", (c: Context) => {
